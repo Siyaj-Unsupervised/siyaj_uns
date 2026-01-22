@@ -27,8 +27,6 @@ def clean_data(file_path):
     else:
         df_final = df.select_dtypes(include=[np.number])
     
-    # حفظ الملف الجديد
-    # --- التعديل هنا لتغيير مسار الحفظ ---
     # 1. الحصول على اسم الملف فقط (بدون المسار)
     file_name = os.path.basename(file_path)
     
