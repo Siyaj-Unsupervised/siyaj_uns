@@ -1,37 +1,20 @@
-# =========================
-# Python cache & build
-# =========================
+# Python / cache
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.so
-build/
-dist/
-wheels/
-*.egg-info/
-.eggs/
+.ipynb_checkpoints/
 
-# Virtual environments
+# Envs
 .venv/
-venv/
 env/
+venv/
 uv.lock
 
-# Data & Models
+# Data & large artifacts
 data/
-docs/*.pdf
-*.pkl
+*.csv
 vector_db/
 
-# Ignore other data formats
-*.pkl
-vector_db/
-# =========================
-# Environment variables & OS
-# =========================
-.env
+# OS / editor
 .DS_Store
-Thumbs.db
 .vscode/
-.idea/慤慴ਯ
+.idea/
