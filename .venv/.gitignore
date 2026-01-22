@@ -1,0 +1,22 @@
+# البيئة الافتراضية (أهم شيء)
+.venv/
+venv/
+env/
+bin/
+lib/
+
+# ملفات المفاتيح السرية (لأمان المشروع)
+.env
+
+# ملفات بايثون المؤقتة
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ملفات البيانات الضخمة (CICIDS 2017 حجمها كبير جداً)
+data/raw/*.csv
+data/processed/*.csv
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
