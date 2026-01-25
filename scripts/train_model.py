@@ -1,27 +1,31 @@
 import pandas as pd
-from sklearn.ensemble import IsolationForest
 import joblib
+from sklearn.ensemble import IsolationForest
+from sklearn.neighbors import LocalOutlierFactor # تصحيح: شلنا المسافة اللي كانت بين الكلمتين
+from sklearn.cluster import KMeans
+import os
 
-# 1. تحميل بيانات الاثنين (Unsupervised Learning)
-print("Reading Monday's normal data...")
-df = pd.read_csv('data/clean/Monday-WorkingHours.pcap_ISCX_cleaned.csv')
+# التأكد من وجود مجلد الموديلات عشان ما يطلع Error
+if not os.path.exists('models'):
+    os.makedirs('models')
 
-# 2. تنظيف البيانات (نختار الخصائص الفنية فقط)
-# نتخلص من الأعمدة غير الفنية مثل الـ IP والوقت
-# سنفترض أن أول 7 أعمدة هي أعمدة تعريفية (Identification)
-X_train = df.iloc[:, 7:] 
+# 1.تحميل البيانات 
+data = pd.read_csv('data/clean/Monday-WorkingHours.pcap_ISCX_cleaned.csv')
 
-# تنظيف البيانات من القيم اللانهائية أو المفقودة
-X_train = X_train.replace([float('inf'), float('-inf')], 0).fillna(0)
+# 2. تجهيز الموديلات
+if_model = IsolationForest(contamination=0.01, random_state=42)
+lof_model = LocalOutlierFactor(n_neighbors=20, novelty=True) # تأكدي من novelty=True عشان نقدر نستخدمه للتوقع لاحقاً
+kmeans_model = KMeans(n_clusters=2, random_state=42)
 
-# 3. بناء الموديل (Anomaly Detector)
-# contamination=0.01 تعني أننا نتوقع وجود 1% شذوذ حتى في البيانات الطبيعية
-model = IsolationForest(n_estimators=100, contamination=0.01, random_state=42)
+# 3. التدريب
+print("⏳ جاري تدريب الموديلات الثلاثة (هذا قد يستغرق دقيقة)...")
+if_model.fit(data)
+lof_model.fit(data) # الـ LOF هنا بيحفظ نمط البيانات الطبيعية
+kmeans_model.fit(data)
 
-# 4. التدريب (هنا الموديل يتعلم السلوك الطبيعي فقط)
-print("Training the Anomaly Detector (Unsupervised)...")
-model.fit(X_train)
+# 4. حفظ الموديلات
+joblib.dump(if_model, 'models/if_model.pkl')
+joblib.dump(lof_model, 'models/lof_model.pkl')
+joblib.dump(kmeans_model, 'models/kmeans_model.pkl')
 
-# 5. حفظ الموديل
-joblib.dump(model, 'scripts/siyaj_anomaly_detector.pkl')
-print("Success! The Anomaly Detector is ready.")
+print("✅ تم تدريب وحفظ جميع الموديلات بنجاح في مجلد models/")
