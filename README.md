@@ -1,12 +1,12 @@
 ## SIYAJ: Unsupervised NIDS (Ensemble Learning)
 ## Overview
 
-# SIYAJ is a Network Intrusion Detection System (NIDS) designed to detect cyber threats using Unsupervised Machine Learning. Unlike traditional systems, SIYAJ doesn't need to be told what an attack looks like; it learns to identify "abnormal" behavior automatically using a collective voting strategy.
+## SIYAJ is a Network Intrusion Detection System (NIDS) designed to detect cyber threats using Unsupervised Machine Learning. Unlike traditional systems, SIYAJ doesn't need to be told what an attack looks like; it learns to identify "abnormal" behavior automatically using a collective voting strategy.
 -------------------------------
 
 ## Dataset & Strategy
 
-# We utilized the CIC-IDS2017 dataset with a strategic split to ensure the system’s effectiveness:
+## We utilized the CIC-IDS2017 dataset with a strategic split to ensure the system’s effectiveness:
 
 - Training Phase (Monday Data): Models were trained exclusively on Monday’s traffic, which consists only of    Benign (Normal) behavior. This helps the system establish a "Gold Standard" for what is normal.
 
@@ -15,14 +15,14 @@
 
 ## Data Preprocessing:
 
-# Cleaned null and infinite values.
+- Cleaned null and infinite values.
 
-# Dropped the 'Label' column during training to ensure a true unsupervised approach.
+- Dropped the 'Label' column during training to ensure a true unsupervised approach.
 -------------------------
 
 ## The AI Engine (Algorithms)
 
-# SIYAJ uses three distinct algorithms to analyze network traffic from different mathematical perspectives:
+## SIYAJ uses three distinct algorithms to analyze network traffic from different mathematical perspectives:
 
 - Isolation Forest: Isolates anomalies by randomly partitioning the data.
 
@@ -32,7 +32,7 @@
 ---------------------------------
 ## Ensemble Strategy: Majority Voting
 
-# To reduce "False Alarms," we implemented a 2-out-of-3 Majority Voting system:
+## To reduce "False Alarms," we implemented a 2-out-of-3 Majority Voting system:
 
 - Each of the 3 models gives a verdict: 0 (Normal) or 1 (Attack).
 
