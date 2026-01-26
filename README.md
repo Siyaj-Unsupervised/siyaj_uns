@@ -1,7 +1,7 @@
 ## SIYAJ: Unsupervised NIDS (Ensemble Learning)
 ## Overview
 
-## SIYAJ is a Network Intrusion Detection System (NIDS) designed to detect cyber threats using Unsupervised Machine Learning. Unlike traditional systems, SIYAJ doesn't need to be told what an attack looks like; it learns to identify "abnormal" behavior automatically using a collective voting strategy.
+## SIYAJ (سياج): An Unsupervised Anomaly-based NIDS, specifically designed to detect Zero-day Attacks by analyzing behavioral deviations from normal network patterns, eliminating the need for pre-labeled attack data.
 -------------------------------
 
 ## Dataset & Strategy
@@ -10,7 +10,7 @@
 
 - Training Phase (Monday Data): Models were trained exclusively on Monday’s traffic, which consists only of    Benign (Normal) behavior. This helps the system establish a "Gold Standard" for what is normal.
 
-- Testing Phase (Wednesday Data): We used Wednesday's data, which contains real-world attacks (DoS, Heartbleed, etc.), to evaluate how well the system identifies anomalies.
+- Testing Phase (Wednesday Data): We used Wednesday's data, which contains real-world attacks (DoS, etc.), to evaluate how well the system identifies anomalies.
 --------------------------------
 
 ## Data Preprocessing:
