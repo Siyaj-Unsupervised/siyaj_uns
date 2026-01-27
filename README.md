@@ -38,3 +38,18 @@
 - Each of the 3 models gives a verdict: 0 (Normal) or 1 (Attack).
 
 - The final system alert is only triggered if at least two models agree that the traffic is malicious.
+
+-------------------------------
+
+## 📌 Reference
+This project was inspired by the Kaggle notebook “CICIDS2017 - ML Models Comparison: Unsupervised”, which applies unsupervised learning to the CICIDS2017 dataset for network anomaly detection.  
+View it here: https://www.kaggle.com/code/ericanacletoribeiro/cicids2017-ml-models-comparison-unsupervised
+
+## 🔮 Future Work
+
+- هذا المشروع حالياً يطبق **Ensemble من نماذج كشف التسلل**، ويقدم نتائج موثوقة لأنواع مختلفة من الهجمات.  
+
+
+##  Potential Future Directions
+- إنشاء **واجهة Web API باستخدام Flask**
+- هل مناسب ؟
