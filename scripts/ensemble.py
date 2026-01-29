@@ -28,7 +28,9 @@ def siyaj_predict(data):
     total_votes = res_if + res_lof + res_km
     final_decision = (total_votes >= 2).astype(int)
 
-    return final_decision
+    confidence = (total_votes / 3) * 100
+
+    return final_decision, confidence
 
 
 if __name__ == "__main__":
