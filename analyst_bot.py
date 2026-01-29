@@ -31,3 +31,4 @@ if __name__ == "__main__":
     print("🛡️ SIYAJ AI ANALYST REPORT")
     print("="*30)
     print(report)
+
