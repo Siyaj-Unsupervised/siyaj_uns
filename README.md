@@ -40,16 +40,21 @@
 - The final system alert is only triggered if at least two models agree that the traffic is malicious.
 
 -------------------------------
+## Intelligent Analysis Layer (LLM Integration)
+
+**To bridge the gap between technical detection and human-readable reports, SIYAJ now includes an AI-Powered Security Analyst:**
+
+- Explainable AI (XAI): We integrated a Generative AI model (DistilGPT2) via the Hugging Face framework to provide natural language explanations for every detected alert.
+
+- Automated Triage: Instead of showing raw alerts, the system generates a concise report explaining the threat's nature (e.g., DoS, Brute Force) and its potential impact on the infrastructure.
+
+- Mitigation Strategy: For every detection, the AI analyst suggests immediate technical fixes (Response), helping security teams act faster without manual research.
+
+- Human-in-the-loop: The LLM acts as a digital assistant, summarizing complex network patterns into actionable insights for the security analyst.
+----------------------------------
 
 ## 📌 Reference
 This project was inspired by the Kaggle notebook “CICIDS2017 - ML Models Comparison: Unsupervised”, which applies unsupervised learning to the CICIDS2017 dataset for network anomaly detection.  
 View it here: https://www.kaggle.com/code/ericanacletoribeiro/cicids2017-ml-models-comparison-unsupervised
 
-## 🔮 Future Work
-
-- هذا المشروع حالياً يطبق **Ensemble من نماذج كشف التسلل**، ويقدم نتائج موثوقة لأنواع مختلفة من الهجمات.  
-
-
-##  Potential Future Directions
-- إنشاء **واجهة Web API باستخدام Flask**
-- هل مناسب ؟
+------------------------------
