@@ -45,3 +45,5 @@ models/**
 !models/*.pkl
 !models/*.json
 !models/.gitkeep
+# Block very large model artifact (GitHub limit)
+models/lof_model.pkl
