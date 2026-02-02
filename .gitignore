@@ -19,19 +19,29 @@ venv/
 # =====================
 # Data
 # =====================
-# Ignore raw (big)
-data/raw/
-data/row/
+# Ignore all data by default (can be large)
+data/**
 
-# Keep clean + samples for demo
-!data/clean/
-!data/samples/
+# Allow only demo-friendly folders/files
+!data/clean/**
+!data/samples/**
+!data/.gitkeep
+!data/clean/.gitkeep
+!data/samples/.gitkeep
 
-# Ignore CSVs by default, allow samples
+# Ignore CSVs everywhere by default
 *.csv
+
+# Allow ONLY sample CSVs (small)
 !data/samples/*.csv
 
 # =====================
 # Models
 # =====================
-# Keep models/*.pkl (required for demo)
+# Ignore models by default (generated artifacts)
+models/**
+
+# Allow only required small artifacts (for demo)
+!models/*.pkl
+!models/*.json
+!models/.gitkeep
