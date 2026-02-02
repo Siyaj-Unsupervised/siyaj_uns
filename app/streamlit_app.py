@@ -58,6 +58,7 @@ st.set_page_config(
     page_title=PAGE_TITLE,
     page_icon="🛡️",
     layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 # ------------------------------------------------------------------
@@ -68,36 +69,40 @@ st.markdown(
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
 
-html, body, [class*="css"]  {
+/* =====================
+   Global fonts
+===================== */
+html, body, [class*="css"] {
   font-family: 'Tajawal', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
 }
 
-/* App background (main page) */
+/* =====================
+   Main app background
+===================== */
 div[data-testid="stAppViewContainer"] {
   background: #334a85;
 }
 
-/* Make inner blocks readable */
+/* Layout spacing */
 .block-container {
   padding-top: 0.8rem;
   padding-bottom: 2rem;
 }
 
-/* Default text color on blue background */
+/* Default text on blue background */
 p, li, span, label, div {
   color: rgba(255,255,255,0.88);
 }
 
-/* Default headings on blue background */
+/* Headings */
 h1, h2, h3 {
   letter-spacing: 0.2px;
   color: rgba(255,255,255,0.96) !important;
 }
 
-/* ====== WHITE TOP HEADER AREA (like split page) ======
-   This styles the FIRST container (top area) to look like a white header.
-   It usually works because your header content is the first block in the app.
-*/
+/* =====================
+   White top header
+===================== */
 div[data-testid="stVerticalBlock"]:first-child {
   background: rgba(255,255,255,0.98);
   border-radius: 18px;
@@ -106,24 +111,24 @@ div[data-testid="stVerticalBlock"]:first-child {
   border: 1px solid rgba(0,0,0,0.06);
 }
 
-/* Title colors inside the top header */
+/* Header titles */
 div[data-testid="stVerticalBlock"]:first-child h1,
 div[data-testid="stVerticalBlock"]:first-child h2,
 div[data-testid="stVerticalBlock"]:first-child h3 {
-  color: #1f3a8a !important;   /* Blue title */
+  color: #1f3a8a !important;
 }
 
-/* Text inside top header becomes dark */
+/* Header text */
 div[data-testid="stVerticalBlock"]:first-child p,
 div[data-testid="stVerticalBlock"]:first-child li,
 div[data-testid="stVerticalBlock"]:first-child span,
 div[data-testid="stVerticalBlock"]:first-child div,
 div[data-testid="stVerticalBlock"]:first-child label,
 div[data-testid="stVerticalBlock"]:first-child .stCaption {
-  color: rgba(15,23,42,0.88) !important; /* dark slate */
+  color: rgba(15,23,42,0.88) !important;
 }
 
-/* Make the horizontal divider look subtle */
+/* Divider */
 hr {
   border: none;
   height: 1px;
@@ -131,52 +136,99 @@ hr {
   margin: 18px 0;
 }
 
-/* Cards feel for metrics */
-div[data-testid="metric-container"]{
+/* =====================
+   Metric cards
+===================== */
+div[data-testid="metric-container"] {
   border: 1px solid rgba(255,255,255,0.14);
   padding: 14px;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
 }
 
-/* Dataframe container */
+/* =====================
+   DataFrame
+===================== */
 div[data-testid="stDataFrame"] {
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
 }
 
-/* Buttons */
-.stButton>button {
+/* =====================
+   Buttons
+===================== */
+.stButton > button {
   border-radius: 14px;
   padding: 0.6rem 1rem;
   border: 1px solid rgba(255,255,255,0.20);
   background: rgba(0,0,0,0.20);
   color: rgba(255,255,255,0.92);
 }
-.stButton>button:hover {
+.stButton > button:hover {
   border: 1px solid rgba(255,255,255,0.35);
   background: rgba(0,0,0,0.28);
 }
 
-/* Sidebar style */
+/* =====================
+   Sidebar (VISIBLE)
+===================== */
 section[data-testid="stSidebar"] {
-  background: rgba(0,0,0,0.18);
-  border-right: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.95) !important;
+  border-right: 1px solid rgba(0,0,0,0.08) !important;
 }
 
-/* Hide Streamlit header */
-header { visibility: hidden; height: 0px; }
+section[data-testid="stSidebar"] * {
+  color: rgba(15,23,42,0.92) !important;
+}
 
-/* Alert boxes */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] label {
+  color: rgba(15,23,42,0.95) !important;
+}
+
+/* Hide Streamlit menu/footer (keep sidebar toggle working) */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+
+/* =====================
+   Alerts
+===================== */
 div[data-testid="stAlert"] {
   border-radius: 14px;
+}
+
+/* =====================
+   🔥 FIX: CODE BLOCKS 🔥
+===================== */
+div[data-testid="stCodeBlock"],
+div[data-testid="stCodeBlock"] pre,
+div[data-testid="stCodeBlock"] code {
+  background: #0b1220 !important;
+  color: #e5e7eb !important;
+}
+
+/* Critical: syntax highlighting uses spans */
+div[data-testid="stCodeBlock"] span {
+  color: #e5e7eb !important;
+}
+
+/* Ensure nothing overrides text */
+div[data-testid="stCodeBlock"] span[style] {
+  color: inherit !important;
+}
+
+/* Code block frame */
+div[data-testid="stCodeBlock"] {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
 }
 </style>
 """,
     unsafe_allow_html=True,
 )
-
 # ------------------------------------------------------------------
 # Header with logo (bigger + neat)
 # ------------------------------------------------------------------
@@ -463,7 +515,7 @@ Evidence (Top Features):
 
         except Exception:
             # IMPORTANT: do not break app if quota/429 happens
-            st.caption("Chat AI غير متاح الآن — تم استخدام الشرح الآمن (Rules fallback).")
+            st.caption("(Rules fallback).")
             rules_explain()
     else:
         rules_explain()
@@ -480,7 +532,9 @@ with tab2:
      if st.button("📄 إنشاء Incident Report"):
         out_dir = os.path.join(BASE_DIR, "data", "actions")
         os.makedirs(out_dir, exist_ok=True)
-        payload = build_incident_payload(alert, hypo, llm_out if "llm_out" in globals() else None)
+
+        payload = build_incident_payload(alert, hypo, None)
+
         filename = f"incident_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
         path = os.path.join(out_dir, filename)
 
@@ -490,16 +544,14 @@ with tab2:
 
         st.success(f"✅ تم حفظ التقرير داخل المشروع: {path}")
 
-
-        # 3) Download للجهاز
+        # 2) Download للجهاز
         json_bytes = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
         st.download_button(
             label="⬇️ Download Incident Report (JSON)",
             data=json_bytes,
             file_name=filename,
-            mime="application/json"
+            mime="application/json",
         )
-
     with col2:
         if st.button("🧱 Firewall Rule (Preview)"):
             st.code(
