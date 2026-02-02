@@ -64,171 +64,130 @@ st.set_page_config(
 # ------------------------------------------------------------------
 # Global CSS (background + fonts + professional UI)
 # ------------------------------------------------------------------
-st.markdown(
-    """
+st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
 
-/* =====================
-   Global fonts
-===================== */
-html, body, [class*="css"] {
-  font-family: 'Tajawal', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+html, body, [class*="css"], .stApp {
+  font-family: 'Tajawal','Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif !important;
 }
 
-/* =====================
-   Main app background
-===================== */
-div[data-testid="stAppViewContainer"] {
+/* خلفية التطبيق الزرقاء */
+div[data-testid="stAppViewContainer"]{
   background: #334a85;
 }
 
-/* Layout spacing */
-.block-container {
+/* مسافات */
+.block-container{
   padding-top: 0.8rem;
   padding-bottom: 2rem;
 }
 
-/* Default text on blue background */
-p, li, span, label, div {
+/* ✅ لون النص العام (بدون ما نلمس div/span) */
+.stApp p, .stApp li, .stApp label{
   color: rgba(255,255,255,0.88);
 }
 
-/* Headings */
-h1, h2, h3 {
+/* العناوين */
+.stApp h1, .stApp h2, .stApp h3{
   letter-spacing: 0.2px;
   color: rgba(255,255,255,0.96) !important;
 }
 
-/* =====================
-   White top header
-===================== */
-div[data-testid="stVerticalBlock"]:first-child {
+/* الهيدر الأبيض (أول بلوك) */
+div[data-testid="stVerticalBlock"]:first-child{
   background: rgba(255,255,255,0.98);
   border-radius: 18px;
   padding: 18px 18px 10px 18px;
   box-shadow: 0 10px 28px rgba(0,0,0,0.18);
   border: 1px solid rgba(0,0,0,0.06);
 }
-
-/* Header titles */
 div[data-testid="stVerticalBlock"]:first-child h1,
 div[data-testid="stVerticalBlock"]:first-child h2,
-div[data-testid="stVerticalBlock"]:first-child h3 {
+div[data-testid="stVerticalBlock"]:first-child h3{
   color: #1f3a8a !important;
 }
-
-/* Header text */
 div[data-testid="stVerticalBlock"]:first-child p,
 div[data-testid="stVerticalBlock"]:first-child li,
-div[data-testid="stVerticalBlock"]:first-child span,
-div[data-testid="stVerticalBlock"]:first-child div,
-div[data-testid="stVerticalBlock"]:first-child label,
-div[data-testid="stVerticalBlock"]:first-child .stCaption {
+div[data-testid="stVerticalBlock"]:first-child label{
   color: rgba(15,23,42,0.88) !important;
 }
 
-/* Divider */
-hr {
-  border: none;
-  height: 1px;
+/* خط فاصل */
+hr{
+  border:none;
+  height:1px;
   background: rgba(255,255,255,0.18);
-  margin: 18px 0;
+  margin:18px 0;
 }
 
-/* =====================
-   Metric cards
-===================== */
-div[data-testid="metric-container"] {
+/* كروت الميتريك */
+div[data-testid="metric-container"]{
   border: 1px solid rgba(255,255,255,0.14);
   padding: 14px;
   border-radius: 16px;
   background: rgba(0,0,0,0.18);
 }
 
-/* =====================
-   DataFrame
-===================== */
-div[data-testid="stDataFrame"] {
+/* داتا فريم */
+div[data-testid="stDataFrame"]{
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
 }
 
-/* =====================
-   Buttons
-===================== */
-.stButton > button {
+/* أزرار */
+.stButton > button{
   border-radius: 14px;
   padding: 0.6rem 1rem;
   border: 1px solid rgba(255,255,255,0.20);
   background: rgba(0,0,0,0.20);
   color: rgba(255,255,255,0.92);
 }
-.stButton > button:hover {
+.stButton > button:hover{
   border: 1px solid rgba(255,255,255,0.35);
   background: rgba(0,0,0,0.28);
 }
 
-/* =====================
-   Sidebar (VISIBLE)
-===================== */
-section[data-testid="stSidebar"] {
+/* سايدبار */
+section[data-testid="stSidebar"]{
   background: rgba(255,255,255,0.95) !important;
   border-right: 1px solid rgba(0,0,0,0.08) !important;
 }
-
-section[data-testid="stSidebar"] * {
+section[data-testid="stSidebar"] *{
   color: rgba(15,23,42,0.92) !important;
 }
 
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] label {
-  color: rgba(15,23,42,0.95) !important;
-}
+/* إخفاء المنيو والفوتر */
+#MainMenu{visibility:hidden;}
+footer{visibility:hidden;}
 
-/* Hide Streamlit menu/footer (keep sidebar toggle working) */
-#MainMenu { visibility: hidden; }
-footer { visibility: hidden; }
-
-/* =====================
-   Alerts
-===================== */
-div[data-testid="stAlert"] {
-  border-radius: 14px;
-}
-
-/* =====================
-   🔥 FIX: CODE BLOCKS 🔥
-===================== */
-div[data-testid="stCodeBlock"],
-div[data-testid="stCodeBlock"] pre,
-div[data-testid="stCodeBlock"] code {
+/* ✅✅✅ FIX قوي للـ CODE BLOCK (Firewall Preview) */
+div[data-testid="stCodeBlock"]{
   background: #0b1220 !important;
-  color: #e5e7eb !important;
-}
-
-/* Critical: syntax highlighting uses spans */
-div[data-testid="stCodeBlock"] span {
-  color: #e5e7eb !important;
-}
-
-/* Ensure nothing overrides text */
-div[data-testid="stCodeBlock"] span[style] {
-  color: inherit !important;
-}
-
-/* Code block frame */
-div[data-testid="stCodeBlock"] {
   border-radius: 12px !important;
-  border: 1px solid rgba(255,255,255,0.16) !important;
+  border: 1px solid rgba(0,0,0,0.18) !important;
+}
+div[data-testid="stCodeBlock"] *{
+  color: #e5e7eb !important; /* يطغى على أي span highlight */
+}
+div[data-testid="stCodeBlock"] span[style]{
+  color: inherit !important; /* يلغي inline styles */
+}
+            .alerts-card{
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(15,23,42,0.10);
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 12px;
+  box-shadow: 0 8px 28px rgba(15,23,42,0.08);
+}
+.alerts-card h1, .alerts-card h2, .alerts-card h3,
+.alerts-card p, .alerts-card label{
+  color: #0f172a !important;
 }
 </style>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 # ------------------------------------------------------------------
 # Header with logo (bigger + neat)
 # ------------------------------------------------------------------
@@ -334,6 +293,7 @@ st.markdown("---")
 # ------------------------------------------------------------------
 # Alerts list
 # ------------------------------------------------------------------
+st.markdown('<div class="alerts-card">', unsafe_allow_html=True)
 st.subheader("🚨 التنبيهات المكتشفة")
 
 if total_alerts == 0:
@@ -357,6 +317,7 @@ selected_id = st.selectbox(
 )
 
 st.dataframe(alerts_df, use_container_width=True, hide_index=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # ------------------------------------------------------------------
 # Build alert + assistant baseline
