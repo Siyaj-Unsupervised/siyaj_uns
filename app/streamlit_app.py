@@ -72,24 +72,63 @@ html, body, [class*="css"]  {
   font-family: 'Tajawal', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
 }
 
-/* App background */
+/* App background (main page) */
 div[data-testid="stAppViewContainer"] {
   background: #334a85;
 }
 
 /* Make inner blocks readable */
 .block-container {
-  padding-top: 1.2rem;
+  padding-top: 0.8rem;
   padding-bottom: 2rem;
 }
 
-/* Headings */
+/* Default text color on blue background */
+p, li, span, label, div {
+  color: rgba(255,255,255,0.88);
+}
+
+/* Default headings on blue background */
 h1, h2, h3 {
   letter-spacing: 0.2px;
   color: rgba(255,255,255,0.96) !important;
 }
-p, li, span, label, div {
-  color: rgba(255,255,255,0.88);
+
+/* ====== WHITE TOP HEADER AREA (like split page) ======
+   This styles the FIRST container (top area) to look like a white header.
+   It usually works because your header content is the first block in the app.
+*/
+div[data-testid="stVerticalBlock"]:first-child {
+  background: rgba(255,255,255,0.98);
+  border-radius: 18px;
+  padding: 18px 18px 10px 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Title colors inside the top header */
+div[data-testid="stVerticalBlock"]:first-child h1,
+div[data-testid="stVerticalBlock"]:first-child h2,
+div[data-testid="stVerticalBlock"]:first-child h3 {
+  color: #1f3a8a !important;   /* Blue title */
+}
+
+/* Text inside top header becomes dark */
+div[data-testid="stVerticalBlock"]:first-child p,
+div[data-testid="stVerticalBlock"]:first-child li,
+div[data-testid="stVerticalBlock"]:first-child span,
+div[data-testid="stVerticalBlock"]:first-child div,
+div[data-testid="stVerticalBlock"]:first-child label,
+div[data-testid="stVerticalBlock"]:first-child .stCaption {
+  color: rgba(15,23,42,0.88) !important; /* dark slate */
+}
+
+/* Make the horizontal divider look subtle */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  margin: 18px 0;
 }
 
 /* Cards feel for metrics */
