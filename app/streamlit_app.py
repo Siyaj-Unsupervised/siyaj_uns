@@ -1,10 +1,22 @@
 import os
 import sys
 import json
+import io
 from datetime import datetime
 
 import pandas as pd
 import streamlit as st
+
+
+def build_incident_payload(alert, hypo, llm_out=None):
+    return {
+        "created_at": datetime.utcnow().isoformat(),
+        "alert": alert,
+        "assistant": {
+            "hypothesis": hypo,
+            "chat": llm_out or {}
+        }
+    }
 
 # ------------------------------------------------------------------
 # Ensure project root on PYTHONPATH
@@ -426,31 +438,28 @@ with tab2:
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button("📄 إنشاء Incident Report"):
-            if create_incident_report is None:
-                # Local fallback (safe)
-                out_dir = os.path.join(BASE_DIR, "data", "actions")
-                os.makedirs(out_dir, exist_ok=True)
-                path = os.path.join(out_dir, f"incident_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json")
-                with open(path, "w", encoding="utf-8") as f:
-                    json.dump({"alert": alert, "hypothesis": hypo}, f, ensure_ascii=False, indent=2)
-                st.success(f"تم إنشاء التقرير: {path}")
-            else:
-                try:
-                    # Try common signatures safely
-                    try:
-                        path = create_incident_report(alert, {"hypothesis": hypo, "assistant": assist})
-                    except TypeError:
-                        path = create_incident_report(alert, hypo)
-                    st.success(f"تم إنشاء التقرير: {path}")
-                except Exception:
-                    st.warning("تعذر إنشاء التقرير عبر pipeline.actions — استخدمي الفallback المحلي.")
-                    out_dir = os.path.join(BASE_DIR, "data", "actions")
-                    os.makedirs(out_dir, exist_ok=True)
-                    path = os.path.join(out_dir, f"incident_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json")
-                    with open(path, "w", encoding="utf-8") as f:
-                        json.dump({"alert": alert, "hypothesis": hypo}, f, ensure_ascii=False, indent=2)
-                    st.success(f"تم إنشاء التقرير: {path}")
+     if st.button("📄 إنشاء Incident Report"):
+        out_dir = os.path.join(BASE_DIR, "data", "actions")
+        os.makedirs(out_dir, exist_ok=True)
+        payload = build_incident_payload(alert, hypo, llm_out if "llm_out" in globals() else None)
+        filename = f"incident_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.json"
+        path = os.path.join(out_dir, filename)
+
+        # 1) حفظ داخل المشروع
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        st.success(f"✅ تم حفظ التقرير داخل المشروع: {path}")
+
+
+        # 3) Download للجهاز
+        json_bytes = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
+        st.download_button(
+            label="⬇️ Download Incident Report (JSON)",
+            data=json_bytes,
+            file_name=filename,
+            mime="application/json"
+        )
 
     with col2:
         if st.button("🧱 Firewall Rule (Preview)"):
