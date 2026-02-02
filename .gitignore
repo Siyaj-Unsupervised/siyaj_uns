@@ -7,17 +7,31 @@ __pycache__/
 .venv/
 env/
 venv/
-uv.lock
-
-# Data & large artifacts
-data/
-*.csv
-vector_db/
 
 # OS / editor
 .DS_Store
 .vscode/
 .idea/
 
-models/
-*.pkl
+# Secrets
+.env
+
+# =====================
+# Data
+# =====================
+# Ignore raw (big)
+data/raw/
+data/row/
+
+# Keep clean + samples for demo
+!data/clean/
+!data/samples/
+
+# Ignore CSVs by default, allow samples
+*.csv
+!data/samples/*.csv
+
+# =====================
+# Models
+# =====================
+# Keep models/*.pkl (required for demo)
